@@ -17,6 +17,7 @@ class MyStreamListener(tweepy.StreamListener):
     def on_status(self, status):
                 if status.user.screen_name == "3s_of" and not "RT" in status.text:
                     try:
+                     print(status.text)
                      api.create_favorite(status.id)
                      api.retweet(status.id)
                     except tweepy.TweepError as e:
