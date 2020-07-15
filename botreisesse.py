@@ -24,4 +24,9 @@ class MyStreamListener(tweepy.StreamListener):
 
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
-myStream.filter(follow=["1274460778205151232"]) 
+myStream.filter(follow=["1274460778205151232"])
+
+while True:
+    for i in range(20):
+        api.update_status("tweet nº: " + i)
+        time.sleep(30)
