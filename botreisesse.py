@@ -13,21 +13,12 @@ auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
-class MyStreamListener(tweepy.StreamListener):
-    def on_status(self, status):
-                if status.user.screen_name == "3s_of" and not "RT" in status.text:
-                    try:
-                     print(status.text)
-                     api.create_favorite(status.id)
-                     api.retweet(status.id)
-                    except tweepy.TweepError as e:
-                     print(e.reason)
-
-myStreamListener = MyStreamListener()
-myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
-myStream.filter(follow=["1274460778205151232"])
-
 while True:
     for i in range(20):
-        api.update_status("tweet nº: " + i)
-        time.sleep(15)
+        try:
+            api.update_status("teste nº " + str(i + 1))
+            time.sleep(15)
+        except tweepy.TweepError as e:
+            print(e.reason)
+        except StopIteration:
+            break                         
