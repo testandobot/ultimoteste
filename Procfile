@@ -1,3 +1,2 @@
 web: python server.py
-worker: python botreisesse.py
-worker: python santos.py
+worker: python botreisesse.py python santos.py
